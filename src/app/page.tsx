@@ -1,113 +1,141 @@
-import Image from 'next/image'
+import Test from "../components/test";
+import Shopping from "../components/shooping";
+import Link from "next/link";
+// import { useState } from "react";
+import type { NextPage, GetStaticProps, GetServerSideProps } from "next";
+// import CostTable from "../components/CostTable";
+import { BarChart } from "../components/InfraBar";
+// import Test from "../components/test";
+import { data } from "../lib/json-data";
 
-export default function Home() {
+type Expense = {
+  item: string;
+  amount: number;
+};
+
+type Expenses = Expense[];
+
+// type HomeProps = {
+//   expenses: Expenses;
+// };
+
+const Home: NextPage<any> = () => {
+  let month = new Date().getMonth();
+
+  // const [monthlyExpenses, setMonthlyExpenses] = useState<Expenses>([]);
+
+  // useEffect(() => {
+  //   setMonthlyExpenses(expenses);
+  // }, [expenses]);
+
+  // function handleClick() {
+  //   // クリック時に実行したい処理をここに記述します
+  //   console.log("クリックされました");
+  // }
+
+  const electric = 9732;
+  const gas = 10832;
+  const water = 9142 / 2;
+  const net = 4300;
+  const total = electric + gas + water + net;
+  const barChartData = [
+    [6830, 5297, 7409 / 2, 4300, 6830 + 5297 + 7409 / 2 + 4300, 3],
+    [electric, gas, water, net, total, 6830 + 5297 + 7409 / 2 + 4300],
+  ];
+  // const graphData = barChartData.map((data) => {
+  //   return {
+  //     labels: ["電気", "ガス", "水道", "ネット", "合計", "先月"],
+  //     datasets: [
+  //       {
+  //         data,
+  //         backgroundColor: [
+  //           "rgba(255, 99, 132, 0.2)",
+  //           "rgba(54, 162, 235, 0.2)",
+  //           "rgba(255, 206, 86, 0.2)",
+  //           "rgba(75, 192, 192, 0.2)",
+  //           "rgba(153, 102, 255, 0.2)",
+  //           "rgba(255, 159, 64, 0.2)",
+  //         ],
+  //         borderColor: [
+  //           "rgba(255, 99, 132, 1)",
+  //           "rgba(54, 162, 235, 1)",
+  //           "rgba(255, 206, 86, 1)",
+  //           "rgba(75, 192, 192, 1)",
+  //           "rgba(153, 102, 255, 1)",
+  //           "rgba(255, 159, 64, 1)",
+  //         ],
+  //         borderWidth: 1,
+  //       },
+  //     ],
+  //   };
+  // });
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div>
+      {/* <div>{expenses.test}</div> */}
+      {/* <BarChart /> */}
+      <div className="max-w-lg m-auto">
+        <h1 className="text-2xl">{month}月分</h1>
+        <span className="text-1xl text-red-500">※赤枠はオーバー</span>
+        {/* <span>{monthlyExpenses[0].amount}</span> */}
+        {/* <CostTable /> */}
+      </div>
+      <section className="container flex items-center justify-center h-screen m-auto mb-12 bg-fixed bg-center bg-cover bg-[url('/img/haru.jpg')]">
+        <div className="p-5 text-2xl text-white bg-purple-300 bg-opacity-50 rounded-xl">
+          買い物リスト
         </div>
-      </div>
+        <div className="p-5 text-2xl text-white bg-purple-300 bg-opacity-50 rounded-xl">
+          買い物リスト
+        </div>
+      </section>
+      <Test />
+      <Shopping />
+      {/* <div className="hidden opacity-0 transition-opacity duration-1000 ease-in-out delay-300">
+        test
+      </div> */}
+      {/* <div
+        className="fixed h-21 w-21 text-2xl text-white bg-purple-300 bg-opacity-50 rounded-xl  bottom-10 right-10"
+        onClick={handleClick}
+      >
+        ボタン
+      </div> */}
+      {/* <div className="fixed w-30 h-30 border-5 border-solid border-gray-400 bottom-10 right-10 p-5 border-t-gray-600 border-l-transparent border-r-transparent transform rotate-45"></div> */}
+      {/* <div
+        className="w-30 h-30 border-5 border-solid border-gray-600 border-t-gray-600 border-l-transparent border-r-transparent transform rotate-45"
+        onClick={() => {
+          window.open("https://www.google.com/?hl=ja");
+        }}
+      >
+        bottun
+      </div> */}
+    </div>
+  );
+};
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   // const params = context.params as Params
+//   // const postData = await getPostData(params.id)
+//   const postData = { test: "test" };
+//   return {
+//     props: {
+//       postData,
+//     },
+//   };
+// };
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+// export const getStaticProps: GetServerSideProps = async () => {
+//   // JSONデータの読み込みを行う箇所です。実際のデータソースに応じて適切なコードを追加してください。
+//   const expenses: Expenses = [
+//     { item: "電気代", amount: 10000 },
+//     { item: "水道代", amount: 5000 },
+//     { item: "ガス代", amount: 7000 },
+//   ];
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+//   console.log(expenses);
+//   return {
+//     props: {
+//       test: "expenses",
+//     },
+//   };
+// };
+export default Home;
